@@ -1,3 +1,4 @@
+# 之前以2.2.2.py命名后面发现这样导入有问题 所以改成了现在的homework222命名
 import matplotlib.pyplot as plt
 import numpy as np
 # 单位取样序列 n1n2为始末 n0为冲激点
@@ -70,6 +71,6 @@ def ex23():
     plt.stem(x, np.angle(y))
     plt.show()
 
-ex23()
+# ex23()
 # print(3*[1,2,3,4,5])
 # 得到的是[1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5]看来numpy还得多看看文档
