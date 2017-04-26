@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>系统频率响应</title>
+</head>
+<body>
+ <form action="/freqz" method="post">
+    <legend>请输入系数b a(多个数用英文逗号隔开) 频率点数 N 不得为空:</legend>
+    <p><input name="b" placeholder="b" value="{{ b }}"></p>
+    <p><input name="a" placeholder="a" value="{{ a }}"></p>
+    <p><input name="N" placeholder="N" value="{{ N }}"></p>
+     <p><button type="submit">画图</button></p>
+  </form>
+<img src="{{img}}">
+ <!--或者像下面-->
+<!--<img src="{{ url_for("static", filename="img/freqz.png") }}">-->
+</body>
+</html>
