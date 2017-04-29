@@ -18,6 +18,9 @@ def FreqzPrint():
     imgName=str(imgtime)+'.png'
     imgPath='static/img/'+imgName
     imgDir='static/img/'
+    staticPath='static/'
+    if(not os.path.exists(staticPath)):
+        os.mkdir(staticPath, 755)
     b=''
     a=''
     N=''
@@ -44,7 +47,7 @@ def FreqzPrint():
         plot(result[0], angH)
         if(os.path.exists(imgDir)):
             shutil.rmtree('static/img/')
-        os.mkdir(imgDir)
+        os.mkdir(imgDir,755)
         savefig(imgPath)
         # 记得清除之前画过的 不然会有两次画的重复
         close('all')
