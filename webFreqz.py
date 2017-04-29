@@ -9,7 +9,8 @@ import shutil
 import os
 
 app = Flask(__name__)
-
+# 调试模式 修改代码后不用重启flask
+app.debug = True
 @app.route('/freqz', methods=['GET','POST'])
 def FreqzPrint():
     # 前面记得加个b Python对bytes类型的数据用带b前缀的单引号或双引号表示
@@ -51,4 +52,5 @@ def FreqzPrint():
     return render_template('freqz.html',b=b,a=a,N=N,img='static/img/'+imgName)
 
 if __name__ == '__main__':
-    app.run()
+    # 加上0.0.0.0.0才能所有ip都可以访问 不然只能本地访问
+    app.run(host='0.0.0.0')
