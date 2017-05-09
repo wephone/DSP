@@ -87,6 +87,8 @@ def DTMF():
         # print(len(wave_data))
         wave_data = wave_data.astype(np.short)
         # 打开WAV文档
+        if (key == '#'):
+            key = 'j'
         fileName="DTMF"+key+".wav"
         f = wave.open(r"static/res/"+fileName, "wb")
         # 配置声道数、量化位数和取样频率
