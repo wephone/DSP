@@ -7,12 +7,14 @@
 <script src="/static/js/vue.js"></script>
 <script src="/static/js/vue-resource.min.js"></script>
 <body>
-双击按钮听音效
+双击按钮听音效 看波形
 <div id="main">
     <button type="button" style="width: 20px;height: 20px" v-for="key in keys" v-on:click="sendKey(key)">{{key}}</button>
 
     <br>
-    <audio id="audio" controls="controls" v-bind:src="wavPath" />music.wav</embed/>
+    <audio id="audio" controls="controls" v-bind:src="wavPath" />music.wav</audio>
+    <br>
+    <img v-bind:src="img">
 </div>
 </body>
 <script>
@@ -20,7 +22,8 @@
         el:"#main",
         data:{
             wavPath:"/static/res/sweep.wav",
-            keys:[1,2,3,4,5,6,7,8,9,'*',0,'#','A','B','C','D']
+            keys:[1,2,3,4,5,6,7,8,9,'*',0,'#','A','B','C','D'],
+            img:""
         },
         methods:{
             sendKey:function(key){
@@ -31,6 +34,7 @@
                         .then(function (response) {
                             if (response.data.statusCode==200){
                                 vm.wavPath=response.data.path;
+                                vm.img=response.data.img;
                                 var audio=document.getElementById('audio');
                                 audio.play();
                             }

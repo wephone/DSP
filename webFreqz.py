@@ -98,10 +98,22 @@ def DTMF():
         # 将wav_data转换为二进制数据写入文件
         f.writeframes(wave_data.tostring())
         f.close()
+        fimg = wave.open("static/res/"+fileName, "rb")
+        params = fimg.getparams()
+        nchannels, sampwidth, framerate, nframes = params[:4]
+        str_data = fimg.readframes(nframes)
+        fimg.close()
+        wave_data = np.fromstring(str_data, dtype=np.short)
+        time = arange(0, nframes) * (1.0 / framerate)
+        plot(time, wave_data)
+        imgpath="static/res/"+"DTMF"+key+".png"
+        savefig(imgpath)
+        close('all')
         result={
             'statusCode':200,
             'message':"成功",
-            'path':"static/res/"+fileName
+            'path':"static/res/"+fileName,
+            'img':imgpath
         }
         return json.dumps(result)
     return render_template('DTMF.html')
