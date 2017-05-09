@@ -49,7 +49,8 @@ def FreqzPrint():
         plot(result[0], angH)
         if(os.path.exists(imgDir)):
             shutil.rmtree('static/img/')
-        os.mkdir(imgDir,755)
+        # 通过os.mkdir只能创建一级目录，如果父目录不存在会报错 后面改用makedirs
+        os.makedirs(imgDir)
         savefig(imgPath)
         # 记得清除之前画过的 不然会有两次画的重复
         close('all')
