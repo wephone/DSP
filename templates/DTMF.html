@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>DTMF</title>
+</head>
+<script src="/static/js/vue.js"></script>
+<script src="/static/js/vue-resource.min.js"></script>
+<body>
+双击按钮听音效
+<div id="main">
+    <button type="button" style="width: 20px;height: 20px" v-for="key in keys" v-on:click="sendKey(key)">{{key}}</button>
+
+    <br>
+    <audio id="audio" controls="controls" v-bind:src="wavPath" />music.wav</embed/>
+</div>
+</body>
+<script>
+    var vm=new Vue({
+        el:"#main",
+        data:{
+            wavPath:"/static/res/sweep.wav",
+            keys:[1,2,3,4,5,6,7,8,9,'*',0,'#','A','B','C','D']
+        },
+        methods:{
+            sendKey:function(key){
+                var vm=this;
+                var formdata=new FormData();
+                formdata.append('key',key);
+                vm.$http.post("/DTMF",formdata)
+                        .then(function (response) {
+                            if (response.data.statusCode==200){
+                                vm.wavPath=response.data.path;
+                                var audio=document.getElementById('audio');
+                                audio.play();
+                            }
+                        },function () {
+                            console.log('error');
+                        });
+            }
+        }
+    })
+</script>
+</html>
